@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shoping Cart</title>
+	<meta charset="UTF-8">
+</head>
+
+<style type="text/css">
+		span {cursor:pointer; }
+		
+		.minus, .plus{
+			width:30px;
+			height:38px;
+			background: #8080ff;
+			border-radius:4px;
+			padding:8px 5px 8px 5px;
+			border:1px solid #262323;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      color:black;
+		}
+		input{
+			height:40px;
+      width: 80px;
+      text-align: center;
+      font-size: 26px;
+			border:5px solid #2f2626;
+			border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+		}	
+</style>
+		
+	<body>
+				<script type="text/javascript">
+			$(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 0 ? 0 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});	
+
+
+
+	</script>
+
+
+
+	<form class="bg0 p-t-80 p-b-85" method="POST" >
+		 {% csrf_token %}
+                <div class="form-group"  style="  visibility: hidden;">
+                  {% render_field form.aut  type="text" class="form-control" placeholder="Title"%}
+                  {% render_field form.flat_number  type="text" class="form-control" placeholder="flat"%}
+              	</div>
+              	
+
+             
+		<div class="container" >
+			<div class="row">
+				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart">
+								<tr class="table_head">
+									<th class="column-1">Product</th>
+									<th class="column-2"></th>
+									<th class="column-3">Price</th>
+									<th class="column-4">Quantity</th>
+									<!-- <th class="column-5">Total</th> -->
+								</tr>
+
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="{% static 'images/bread.png' %}" alt="IMG">
+										</div>
+									</td>
+									<td class="column-2">Fresh Bread</td>
+									<td class="column-3">Rs.35</td>
+									<td class="column-4">
+									
+											<span class="minus">-</span>
+					<input  name="bread" value="0"/>
+					
+					<span class="plus" onclick="document.getElementById('b').style.visibility='visible'">+</span>
+										<!-- </div> -->
+									</td>
+									<!-- <td class="column-5">$ 36.00</td> -->
+								</tr>
+
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="{% static 'images/milk.png' %}" alt="IMG">
+										</div>
+									</td>
+									<td class="column-2">Milk</td>
+									<td class="column-3">Rs.22</td>
+									<td class="column-4">
+										<span class="minus" >-</span>
+										<input  name="milk" value="0"/>
+										<span class="plus" onclick="document.getElementById('b').style.visibility='visible'">+</span>
+									</td>
+									<!-- <td class="column-5">$ 16.00</td> -->
+								</tr>
+
+
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="{% static 'images/rice.png' %}" alt="IMG">
+										</div>
+									</td>
+									<td class="column-2">Rice</td>
+									<td class="column-3">Rs.40</td>
+									<td class="column-4">
+										<span class="minus">-</span>
+										<input  name="rice" value="0"/>
+										<span class="plus" onclick="document.getElementById('b').style.visibility='visible'">+</span>
+									</td>
+									<!-- <td class="column-5">$ 16.00</td> -->
+								</tr>
+
+
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="{% static 'images/water.png' %}" alt="IMG">
+										</div>
+									</td>
+									<td class="column-2">Water Can</td>
+									<td class="column-3">RS. 50</td>
+									<td class="column-4">
+										<span class="minus">-</span>
+										<input  name="water" value="0"/>
+										<span class="plus" onclick="document.getElementById('b').style.visibility='visible'">+</span>
+									</td>
+									<!-- <td class="column-5">$ 16.00</td> -->
+								</tr>
+							</table>
+						</div>
+
+
+							<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"  type="submit"  onclick="this.disabled=true" value="Submit" style="visibility:hidden" id="b">
+							Place Order
+						</button>
+						</div>
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+	</form>
+		
+	
+		
+
+
+
+</body>
+</html>
+
+
+
+{% endblock %}

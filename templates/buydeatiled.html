@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+
+
+
+{% load static %}
+
+{% block page_content %}
+
+<style type="text/css">
+    span {cursor:pointer; }
+    
+    .minus, .plus{
+      width:30px;
+      height:38px;
+      background: #8080ff;
+      border-radius:4px;
+      padding:8px 5px 8px 5px;
+      border:1px solid #262323;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      color:black;
+    }
+    input{
+      height:40px;
+      width: 80px;
+      text-align: center;
+      font-size: 26px;
+      border:5px solid #2f2626;
+      border-radius:4px;
+      display: inline-block;
+      vertical-align: middle;
+    } 
+</style>
+    
+  <body>
+        <script type="text/javascript">
+      $(document).ready(function() {
+      $('.minus').click(function () {
+        var $input = $(this).parent().find('input');
+        var count = parseInt($input.val()) - 1;
+        count = count < 0 ? 0 : count;
+        $input.val(count);
+        $input.change();
+        return false;
+      });
+      $('.plus').click(function () {
+        var $input = $(this).parent().find('input');
+        $input.val(parseInt($input.val()) + 1);
+        $input.change();
+        return false;
+      });
+    }); 
+
+
+
+  </script>
+
+
+
+
+<div class="jumbotron" style="background-color:#a3c2c2">
+  <h1 style="font-family: 'Cormorant', serif;"><br><center>Order Now</center></h1>
+  
+</div>
+
+ <form  method="POST" >
+  {% csrf_token %}
+          <!-- {{form1.qu}}<br /><hr />
+          {{cat}}
+          {{form1.t}}<br /><hr />
+          {{form1.r}}<br /><hr />
+          {{form2.aut}}<br /><hr />
+          {{form2.flat_number}}<br /><hr /> -->
+         
+<!-- quant <input  type = "number" name="qu" >
+<input  name="t" value= {{cat}} style="  visibility: hidden;" >
+<input  name="r" value = {{aut}}>
+<input  name="aut" value="{{aut}}">
+ -->
+
+
+<hr />
+{{form1}}
+
+
+<!-- {{form2}} -->
+         
+               
+
+             <button  onclick="this.disabled=true" class="login100-form-btn">
+              submit
+            </button>
+        
+          
+    </form>      
+
+
+      </body>
+      {% endblock %}}
